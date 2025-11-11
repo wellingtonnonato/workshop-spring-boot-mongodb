@@ -1,5 +1,6 @@
 package com.nonato.workshopmongo.resources;
 
+import com.nonato.workshopmongo.domain.Post;
 import com.nonato.workshopmongo.domain.User;
 import com.nonato.workshopmongo.dto.UserDTO;
 import jakarta.servlet.Servlet;
@@ -31,6 +32,12 @@ public class UserResource {
     public ResponseEntity<UserDTO> findById(@PathVariable String id){
         User obj = service.findById(id);
         return ResponseEntity.ok().body(new UserDTO(obj));
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
     @PostMapping
