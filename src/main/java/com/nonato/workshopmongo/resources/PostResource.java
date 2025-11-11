@@ -29,4 +29,11 @@ public class PostResource {
         return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping(value = "/searchTitle")
+    public ResponseEntity<List<Post>> searchTitle(@RequestParam(value = "text", defaultValue = "") String text){
+        text = URL.decodeParam(text);
+        List<Post> list = service.searchTitle(text);
+        return ResponseEntity.ok().body(list);
+    }
+
 }
